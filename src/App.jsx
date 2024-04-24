@@ -49,18 +49,18 @@ function App() {
                 showCover={false}
                 mobileScrollSupport={true}
             >
-              <Page number="1" src="/public/img/1.JPG" alt="Brosur_Halaman_1"/>
-              <Page number="2" src="/public/img/2.JPG" alt="Brosur_Halaman_2"/>
-              <Page number="3" src="/public/img/3.JPG" alt="Brosur_Halaman_3"/>
-              <Page number="4" src="/public/img/4.JPG" alt="Brosur_Halaman_4"/>
-              <Page number="5" src="/public/img/5.JPG" alt="Brosur_Halaman_5"/>
-              <Page number="6" src="/public/img/6.JPG" alt="Brosur_Halaman_6"/>
-              <Page number="7" src="/public/img/7.JPG" alt="Brosur_Halaman_7"/>
-              <Page number="8" src="/public/img/8.JPG" alt="Brosur_Halaman_8"/>
-              <Page number="9" src="/public/img/9.JPG" alt="Brosur_Halaman_9"/>
-              <Page number="10" src="/public/img/10.JPG" alt="Brosur_Halaman_10"/>
-              <Page number="11" src="/public/img/11.JPG" alt="Brosur_Halaman_11"/>
-              <Page number="12" src="/public/img/12.JPG" alt="Brosur_Halaman_12"/>
+              <Page number="1" src="/img/1.JPG" alt="Brosur_Halaman_1"/>
+              <Page number="2" src="/img/2.JPG" alt="Brosur_Halaman_2"/>
+              <Page number="3" src="/img/3.JPG" alt="Brosur_Halaman_3"/>
+              <Page number="4" src="/img/4.JPG" alt="Brosur_Halaman_4"/>
+              <Page number="5" src="/img/5.JPG" alt="Brosur_Halaman_5"/>
+              <Page number="6" src="/img/6.JPG" alt="Brosur_Halaman_6"/>
+              <Page number="7" src="/img/7.JPG" alt="Brosur_Halaman_7"/>
+              <Page number="8" src="/img/8.JPG" alt="Brosur_Halaman_8"/>
+              <Page number="9" src="/img/9.JPG" alt="Brosur_Halaman_9"/>
+              <Page number="10" src="/img/10.JPG" alt="Brosur_Halaman_10"/>
+              <Page number="11" src="/img/11.JPG" alt="Brosur_Halaman_11"/>
+              <Page number="12" src="/img/12.JPG" alt="Brosur_Halaman_12"/>
             </HTMLFlipBook>
           </div>
           <div className="block lg:hidden">
