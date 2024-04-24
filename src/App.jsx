@@ -8,8 +8,8 @@ const Page = forwardRef((props, ref) => {
       <div className="group/book realtive bg-gradient-to-b from-blue-900 to-blue-950 text-white flex justify-center items-center h-full w-full">
         <img src={props.src} alt={props.alt} className="w-full h-full" />
         <div className="absolute inset-0 shadow-ke-dalam">
-        <span className={`hidden lg:block group-hover/book:opacity-100 opacity-0 transition-opacity duration-300 bg-black/25 text-white rounded-lg p-2 absolute cursor-pointer ${props.number % 2 === 0 ? 'end-4' : 'start-4'} top-1/2`}>{props.number % 2 === 0 ? <i className="fa fa-fw fa-arrow-right"/> : <i className="fa fa-fw fa-arrow-left"/>}</span>
-        <span className={`absolute ${props.number % 2 === 0 ? 'bottom-4 end-4' : 'bottom-4 start-4'} text-xs text-white`}>Halaman {props.number}</span>
+          {props.nextButton && <span className={`hidden lg:block group-hover/book:opacity-100 opacity-0 transition-opacity duration-300 bg-black/25 text-white rounded-lg p-2 absolute cursor-pointer ${props.number % 2 === 0 ? 'end-4' : 'start-4'} top-1/2`}>{props.number % 2 === 0 ? <i className="fa fa-fw fa-arrow-right"/> : <i className="fa fa-fw fa-arrow-left"/>}</span>}
+          <span className={`absolute ${props.number % 2 === 0 ? 'end-4' : 'start-auto end-4 sm:start-4 sm:end-auto'} bottom-4 text-xs text-white`}>Halaman {props.number}</span>
         </div>
       </div>
     </div>
@@ -49,18 +49,18 @@ function App() {
                 showCover={false}
                 mobileScrollSupport={true}
             >
-              <Page number="1" src="/img/1.JPG" alt="Brosur_Halaman_1"/>
-              <Page number="2" src="/img/2.JPG" alt="Brosur_Halaman_2"/>
-              <Page number="3" src="/img/3.JPG" alt="Brosur_Halaman_3"/>
-              <Page number="4" src="/img/4.JPG" alt="Brosur_Halaman_4"/>
-              <Page number="5" src="/img/5.JPG" alt="Brosur_Halaman_5"/>
-              <Page number="6" src="/img/6.JPG" alt="Brosur_Halaman_6"/>
-              <Page number="7" src="/img/7.JPG" alt="Brosur_Halaman_7"/>
-              <Page number="8" src="/img/8.JPG" alt="Brosur_Halaman_8"/>
-              <Page number="9" src="/img/9.JPG" alt="Brosur_Halaman_9"/>
-              <Page number="10" src="/img/10.JPG" alt="Brosur_Halaman_10"/>
-              <Page number="11" src="/img/11.JPG" alt="Brosur_Halaman_11"/>
-              <Page number="12" src="/img/12.JPG" alt="Brosur_Halaman_12"/>
+              <Page nextButton={false} number="1" src="/img/1.JPG" alt="Brosur_Halaman_1"/>
+              <Page nextButton number="2" src="/img/2.JPG" alt="Brosur_Halaman_2"/>
+              <Page nextButton number="3" src="/img/3.JPG" alt="Brosur_Halaman_3"/>
+              <Page nextButton number="4" src="/img/4.JPG" alt="Brosur_Halaman_4"/>
+              <Page nextButton number="5" src="/img/5.JPG" alt="Brosur_Halaman_5"/>
+              <Page nextButton number="6" src="/img/6.JPG" alt="Brosur_Halaman_6"/>
+              <Page nextButton number="7" src="/img/7.JPG" alt="Brosur_Halaman_7"/>
+              <Page nextButton number="8" src="/img/8.JPG" alt="Brosur_Halaman_8"/>
+              <Page nextButton number="9" src="/img/9.JPG" alt="Brosur_Halaman_9"/>
+              <Page nextButton number="10" src="/img/10.JPG" alt="Brosur_Halaman_10"/>
+              <Page nextButton number="11" src="/img/11.JPG" alt="Brosur_Halaman_11"/>
+              <Page nextButton={false} number="12" src="/img/12.JPG" alt="Brosur_Halaman_12"/>
             </HTMLFlipBook>
           </div>
           <div className="block lg:hidden">
