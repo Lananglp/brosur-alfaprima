@@ -23,15 +23,16 @@ function App() {
   const bookRef = useRef(null);
 
   useEffect(() => {
-    contentRef.current.style.zoom = `${zoom}%`;
+    // contentRef.current.style.zoom = `${zoom}%`;
+    document.body.style.zoom = `${zoom}%`;
 
-    if (zoom > 100) {
-      const backdrop = document.querySelector('.backdrop');
-      const contentWidth = bookRef.current.innerWidth;
-      const contentHeight = bookRef.current.innerHeight;
-      backdrop.style.width = `${contentWidth}px`;
-      backdrop.style.height = `${contentHeight}px`;
-    }
+    // if (zoom > 100) {
+    //   const backdrop = document.querySelector('.backdrop');
+    //   const contentWidth = bookRef.current.innerWidth;
+    //   const contentHeight = bookRef.current.innerHeight;
+    //   backdrop.style.width = `${contentWidth}px`;
+    //   backdrop.style.height = `${contentHeight}px`;
+    // }
 
   }, [zoom, contentRef, bookRef]);
 
@@ -69,7 +70,7 @@ function App() {
                 maxHeight={800}
                 maxShadowOpacity={0.5}
                 showCover={false}
-                mobileScrollSupport={true}
+                mobileScrollSupport={false}
                 // autoSize={true}
                 // disableFlipByClick
                 // clickEventForward={false}
