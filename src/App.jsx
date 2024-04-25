@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import './App.css'
 
@@ -8,7 +8,7 @@ const Page = forwardRef((props, ref) => {
       <div className="group/book realtive bg-gradient-to-b from-blue-900 to-blue-950 text-white flex justify-center items-center h-full w-full">
         <img src={props.src} alt={props.alt} className="w-full h-full" />
         <div className="absolute inset-0 shadow-ke-dalam">
-          {props.nextButton && <span className={`hidden lg:block group-hover/book:opacity-100 opacity-0 transition-opacity duration-300 bg-black/25 text-white rounded-lg p-2 absolute cursor-pointer ${props.number % 2 === 0 ? 'end-4' : 'start-4'} top-1/2`}>{props.number % 2 === 0 ? <i className="fa fa-fw fa-arrow-right"/> : <i className="fa fa-fw fa-arrow-left"/>}</span>}
+          {/* {props.nextButton && <span className={`hidden lg:block group-hover/book:opacity-100 opacity-0 transition-opacity duration-300 bg-black/25 text-white rounded-lg p-2 absolute cursor-pointer ${props.number % 2 === 0 ? 'end-4' : 'start-4'} top-1/2`}>{props.number % 2 === 0 ? <i className="fa fa-fw fa-arrow-right"/> : <i className="fa fa-fw fa-arrow-left"/>}</span>} */}
           <span className={`absolute ${props.number % 2 === 0 ? 'end-4' : 'start-auto end-4 sm:start-4 sm:end-auto'} bottom-4 text-xs text-white`}>Halaman {props.number}</span>
         </div>
       </div>
@@ -17,6 +17,24 @@ const Page = forwardRef((props, ref) => {
 });
 
 function App() {
+
+  const [zoom, setZoom] = useState(100);
+  const contentRef = useRef(null);
+  const bookRef = useRef(null);
+
+  useEffect(() => {
+    contentRef.current.style.zoom = `${zoom}%`;
+
+    if (zoom > 100) {
+      const backdrop = document.querySelector('.backdrop');
+      const contentWidth = bookRef.current.innerWidth;
+      const contentHeight = bookRef.current.innerHeight;
+      backdrop.style.width = `${contentWidth}px`;
+      backdrop.style.height = `${contentHeight}px`;
+    }
+
+  }, [zoom, contentRef, bookRef]);
+
   return (
     <div className='overflow-x-hidden overflow-y-auto h-screen bg-gradient-to-r from-blue-950 to-blue-700 flex justify-center lg:items-center'>
         <div className="w-full lg:flex flex-row px-4">
@@ -29,15 +47,19 @@ function App() {
                 <li className="text-sm mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, dolorem.</li>
               </ul> */}
               <div>
-                <h6 className="mb-8 lg:text-xl font-semibold">Kuliah Singkat Cepat dapat Kerja?<br />hanya di Alfa Prima.<br />Ayo daftar sekarang! Temukan potensimu<br />dan raih masa depan gemilang bersama kami!</h6>
+                {/* <h6 className="mb-8 lg:text-xl font-semibold">Kuliah Singkat Cepat dapat Kerja?<br />hanya di Alfa Prima.<br />Ayo daftar sekarang! Temukan potensimu<br />dan raih masa depan gemilang bersama kami!</h6> */}
+                <h6 className="mb-8 lg:text-xl font-semibold">Kuliah Singkat Cepat dapat Kerja?<br />Ayo daftar sekarang! Temukan potensimu<br />dan raih masa depan gemilang bersama kami!</h6>
                 <a target="blank_" href="https://dev.alfaprima.id/form" className="bg-yellow-500 hover:bg-yellow-600 rounded-lg text-black font-bold text-lg px-4 py-2">Daftar sekarang!</a>
-                <p className="mt-8 text-sm text-zinc-300"><i className="fa fa-fw fa-circle-info text-cyan-400"/> Klik di area gambar bagian kiri atau kanan untuk menuju ke halaman selanjutnya maupun ke halaman sebelumnya.</p>
+                {/* <p className="mt-8 text-sm text-zinc-300"><i className="fa fa-fw fa-circle-info text-cyan-400"/> Klik di area gambar bagian kiri atau kanan untuk menuju ke halaman selanjutnya maupun ke halaman sebelumnya.</p> */}
+                <p className="mt-8 text-sm text-zinc-300"><i className="fa fa-fw fa-circle-info text-cyan-400"/> Geser gambar ke kiri atau kanan untuk menuju ke halaman selanjutnya / sebelumnya.</p>
               </div>
               <p className="hidden lg:block mt-8 text-sm text-zinc-300">Copyright © Alfa Prima {new Date().getFullYear()}</p>
             </div>
           </div>
-          <div className="overflow-hidden lg:basis-2/3 lg:w-full lg:h-full pb-4 lg:pb-0">
+          <div ref={contentRef} className={`lg:basis-2/3 pb-4 lg:pb-0 relative ${zoom > 100 ? "overflow-scroll" : "overflow-hidden"}`}>
+            {zoom > 100 && <div className="backdrop absolute z-50 bg-red-500/50"></div>}
             <HTMLFlipBook
+                ref={bookRef}
                 width={450}
                 height={600}
                 size="stretch"
@@ -48,6 +70,9 @@ function App() {
                 maxShadowOpacity={0.5}
                 showCover={false}
                 mobileScrollSupport={true}
+                // autoSize={true}
+                // disableFlipByClick
+                // clickEventForward={false}
             >
               <Page nextButton={false} number="1" src="/img/1.JPG" alt="Brosur_Halaman_1"/>
               <Page nextButton number="2" src="/img/2.JPG" alt="Brosur_Halaman_2"/>
@@ -65,6 +90,11 @@ function App() {
           </div>
           <div className="block lg:hidden">
             <p className="py-4 text-center text-sm text-zinc-300">Copyright © Alfa Prima {new Date().getFullYear()}</p>
+          </div>
+          <div className="fixed start-0 bottom-0">
+            <button onClick={() => setZoom(zoom + 15)} type="button" className="p-2 bg-red-500">{"+"}</button>
+            <button onClick={() => setZoom(zoom - 15)} type="button" className="p-2 bg-green-500">{"-"}</button>
+            <button onClick={() => setZoom(100)} type="button" className="p-2 bg-yellow-500">{"reset"}</button>
           </div>
         </div>
       </div>
