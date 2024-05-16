@@ -4,6 +4,7 @@ import './App.css'
 
 const Slider = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const geserRef = useRef(null);
 
   const goToPreviousSlide = () => {
     const newIndex = (currentSlide - 1 + images.length) % images.length;
@@ -15,14 +16,43 @@ const Slider = ({ images }) => {
     setCurrentSlide(newIndex);
   };
 
+  useEffect(() => {
+    if (geserRef.current) {
+      setTimeout(() => {
+        geserRef.current.classList.remove("hidden");
+        geserRef.current.classList.add("block");
+      }, 3000);
+      setTimeout(() => {
+        geserRef.current.classList.remove("opacity-0");
+        geserRef.current.classList.add("opacity-100");
+      }, 3100);
+    }
+  }, []);
+
+  const closeGeser = (e) => {
+    if (geserRef.current.contains(e.target)) {
+      geserRef.current.classList.remove("opacity-100");
+      geserRef.current.classList.add("opacity-0");
+      setTimeout(() => {
+        geserRef.current.classList.remove("block");
+        geserRef.current.classList.add("hidden");
+      }, 100);
+    }
+  }
+
   return (
     <div className="relative">
       <div className="overflow-hidden">
-        <div className="slider-mobile flex rounded-lg transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+        <div className="slider-mobile flex rounded-xl transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
           {images.map((image, index) => (
-            <img key={index} src={image} alt={`Slide ${index}`} className="w-full h-auto" />
+            <img key={index} src={image} alt={`Slide ${index}`} className="w-full h-full" />
           ))}
         </div>
+      </div>
+      <div onClick={closeGeser} ref={geserRef} className="opacity-0 hidden transition duration-300 absolute start-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 p-12 bg-black/50 rounded-xl text-nowrap text-center text-white">
+        <i className="absolute top-4 end-4 fa fa-fw fa-close"/>
+        <i className="animasi-geser fa fa-fw text-5xl fa-hand-pointer mb-4"/>
+        <p>Silahkan geser gambar ini</p>
       </div>
       {/* <button onClick={goToPreviousSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-l focus:outline-none">
         Previous
