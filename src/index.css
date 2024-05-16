@@ -66,3 +66,16 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+@media screen and (max-width: 600px) {
+  .slider-mobile {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; /* Untuk smooth scroll di iOS */
+  }
+
+  .slider-mobile > * {
+    scroll-snap-align: start;
+  }
+}
+

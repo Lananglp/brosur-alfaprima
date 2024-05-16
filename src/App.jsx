@@ -2,6 +2,38 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 import './App.css'
 
+const Slider = ({ images }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToPreviousSlide = () => {
+    const newIndex = (currentSlide - 1 + images.length) % images.length;
+    setCurrentSlide(newIndex);
+  };
+
+  const goToNextSlide = () => {
+    const newIndex = (currentSlide + 1) % images.length;
+    setCurrentSlide(newIndex);
+  };
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden">
+        <div className="slider-mobile flex rounded-lg transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+          {images.map((image, index) => (
+            <img key={index} src={image} alt={`Slide ${index}`} className="w-full h-auto" />
+          ))}
+        </div>
+      </div>
+      {/* <button onClick={goToPreviousSlide} className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-l focus:outline-none">
+        Previous
+      </button>
+      <button onClick={goToNextSlide} className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded-r focus:outline-none">
+        Next
+      </button> */}
+    </div>
+  );
+};
+
 const Page = forwardRef((props, ref) => {
   return (
     <div className={`overflow-hidden ${props.number % 2 === 0 ? 'lg:rounded-r-xl' : 'lg:rounded-l-xl'} rounded-xl lg:rounded-none shadow-xl shadow-black/25 h-full w-full`} ref={ref}>
@@ -72,6 +104,21 @@ function App() {
     }
   };
 
+  const images = [
+    '/img/1.JPG',
+    '/img/2.JPG',
+    '/img/3.JPG',
+    '/img/4.JPG',
+    '/img/5.JPG',
+    '/img/6.JPG',
+    '/img/7.JPG',
+    '/img/8.JPG',
+    '/img/9.JPG',
+    '/img/10.JPG',
+    '/img/11.JPG',
+    '/img/12.JPG',
+  ];
+
   return (
     <div className='overflow-x-hidden overflow-y-auto h-screen bg-gradient-to-r from-blue-950 to-blue-700 flex justify-center lg:items-center'>
         <div className="w-full lg:flex flex-row px-4">
@@ -93,7 +140,7 @@ function App() {
               <p className="hidden lg:block mt-8 text-sm text-zinc-300">Copyright © Alfa Prima {new Date().getFullYear()}</p>
             </div>
           </div>
-          <div tabIndex={0} ref={contentRef} className={`lg:basis-2/3 pb-4 lg:pb-0 relative ${zoom > 100 ? "overflow-scroll aspect-[2/3] md:aspect-auto" : "overflow-hidden"}`}>
+          <div tabIndex={0} ref={contentRef} className={`hidden lg:block lg:basis-2/3 pb-4 lg:pb-0 relative ${zoom > 100 ? "overflow-scroll aspect-[2/3] md:aspect-auto" : "overflow-hidden"}`}>
             <div className="relative">
               {/* {zoom > 100 && <div className="absolute w-full h-full z-50 bg-red-500/50"/>} */}
               <HTMLFlipBook
@@ -128,10 +175,13 @@ function App() {
               </HTMLFlipBook>
             </div>
           </div>
+          <div className="block lg:hidden max-w-xl mx-auto">
+            <Slider images={images} />
+          </div>
           <div className="block lg:hidden">
             <p className="py-4 text-center text-sm text-zinc-300">Copyright © Alfa Prima {new Date().getFullYear()}</p>
           </div>
-          <div className="scale-75 md:scale-90 fixed start-1/2 -translate-x-1/2 bottom-0 flex items-center bg-zinc-900 rounded-lg p-2">
+          <div className="hidden lg:block scale-75 md:scale-90 fixed start-1/2 -translate-x-1/2 bottom-0 flex items-center bg-zinc-900 rounded-lg p-2">
             <button onClick={() => setZoom(zoom + 15)} disabled={zoom < 190 ? false : true} type="button" className={`${zoom < 190 ? 'hover:bg-zinc-700/75' : 'opacity-50'} px-3 py-2 rounded text-nowrap text-xs font-medium text-white bg-zinc-800 transition duration-200 mx-1`}><i className="fa fa-fw fa-plus"/> Zoom In</button>
             <button onClick={() => setZoom(zoom - 15)} disabled={zoom > 100 ? false : true} type="button" className={`${zoom > 100 ? 'hover:bg-zinc-700/75' : 'opacity-50'} px-3 py-2 rounded text-nowrap text-xs font-medium text-white bg-zinc-800 transition duration-200 mx-1`}><i className="fa fa-fw fa-minus"/> Zoom Out</button>
             <button onClick={() => setZoom(100)} disabled={zoom > 100 ? false : true} type="button" className={`${zoom > 100 ? 'hover:bg-zinc-700/75' : 'opacity-50'} px-3 py-2 rounded text-nowrap text-xs font-medium text-white bg-zinc-800 hover:bg-zinc-700/75 transition duration-200 mx-1`}><i className="fa fa-fw fa-rotate-right"/> Reset</button>
