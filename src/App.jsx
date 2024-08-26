@@ -66,7 +66,7 @@ const Slider = ({ images }) => {
 
 const Page = forwardRef((props, ref) => {
   return (
-    <div className={`overflow-hidden ${props.number % 2 === 0 ? 'lg:rounded-r-xl' : 'lg:rounded-l-xl'} rounded-xl lg:rounded-none shadow-xl shadow-black/25 h-full w-full`} ref={ref}>
+    <div className={`overflow-hidden rounded-xl lg:rounded-none shadow-xl shadow-black/25 h-full w-full`} ref={ref}>
       <div className="group/book realtive bg-gradient-to-b from-blue-900 to-blue-950 text-white flex justify-center items-center h-full w-full">
         <img src={props.src} alt={props.alt} className="w-full h-full" />
         <div className="absolute inset-0 shadow-ke-dalam">
@@ -135,18 +135,14 @@ function App() {
   };
 
   const images = [
-    '/img/1.JPG',
-    '/img/2.JPG',
-    '/img/3.JPG',
-    '/img/4.JPG',
-    '/img/5.JPG',
-    '/img/6.JPG',
-    '/img/7.JPG',
-    '/img/8.JPG',
-    '/img/9.JPG',
-    '/img/10.JPG',
-    '/img/11.JPG',
-    '/img/12.JPG',
+    '/img/2024/1.jpg',
+    '/img/2024/2.jpg',
+    '/img/2024/3.jpg',
+    '/img/2024/4.jpg',
+    '/img/2024/5.jpg',
+    '/img/2024/6.jpg',
+    '/img/2024/7.jpg',
+    '/img/2024/8.jpg',
   ];
 
   return (
@@ -174,6 +170,7 @@ function App() {
             <div className="relative">
               {/* {zoom > 100 && <div className="absolute w-full h-full z-50 bg-red-500/50"/>} */}
               <HTMLFlipBook
+                  // className="shadow-ke-dalam bg-blue-950/25"
                   width={450}
                   height={600}
                   size="stretch"
@@ -182,7 +179,7 @@ function App() {
                   minHeight={380}
                   maxHeight={800}
                   maxShadowOpacity={0.5}
-                  showCover={false}
+                  showCover={true}
                   mobileScrollSupport={true}
                   // autoSize={true}
                   // disableFlipByClick
@@ -190,18 +187,14 @@ function App() {
                   onFlip={false}
                   useMouseEvents
               >
-                <Page nextButton={false} number="1" src="/img/1.JPG" alt="Brosur_Halaman_1"/>
-                <Page nextButton number="2" src="/img/2.JPG" alt="Brosur_Halaman_2"/>
-                <Page nextButton number="3" src="/img/3.JPG" alt="Brosur_Halaman_3"/>
-                <Page nextButton number="4" src="/img/4.JPG" alt="Brosur_Halaman_4"/>
-                <Page nextButton number="5" src="/img/5.JPG" alt="Brosur_Halaman_5"/>
-                <Page nextButton number="6" src="/img/6.JPG" alt="Brosur_Halaman_6"/>
-                <Page nextButton number="7" src="/img/7.JPG" alt="Brosur_Halaman_7"/>
-                <Page nextButton number="8" src="/img/8.JPG" alt="Brosur_Halaman_8"/>
-                <Page nextButton number="9" src="/img/9.JPG" alt="Brosur_Halaman_9"/>
-                <Page nextButton number="10" src="/img/10.JPG" alt="Brosur_Halaman_10"/>
-                <Page nextButton number="11" src="/img/11.JPG" alt="Brosur_Halaman_11"/>
-                <Page nextButton={false} number="12" src="/img/12.JPG" alt="Brosur_Halaman_12"/>
+                <Page nextButton={false} number="1" src="/img/2024/1.jpg" alt="Brosur_Halaman_1"/>
+                <Page nextButton number="2" src="/img/2024/2.jpg" alt="Brosur_Halaman_2"/>
+                <Page nextButton number="3" src="/img/2024/3.jpg" alt="Brosur_Halaman_3"/>
+                <Page nextButton number="4" src="/img/2024/4.jpg" alt="Brosur_Halaman_4"/>
+                <Page nextButton number="5" src="/img/2024/5.jpg" alt="Brosur_Halaman_5"/>
+                <Page nextButton number="6" src="/img/2024/6.jpg" alt="Brosur_Halaman_6"/>
+                <Page nextButton number="7" src="/img/2024/7.jpg" alt="Brosur_Halaman_7"/>
+                <Page nextButton={false} number="12" src="/img/2024/8.jpg" alt="Brosur_Halaman_8"/>
               </HTMLFlipBook>
             </div>
           </div>
